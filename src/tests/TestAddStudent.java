@@ -38,7 +38,7 @@ public class TestAddStudent {
         });
 
         // valid student
-        Student student2 = new Student("12345", "maria", 933, "maria@email.com");
+        Student student2 = new Student("123456", "maria", 933, "maria@email.com");
 
         Assertions.assertNull(service.addStudent(student2));
 
