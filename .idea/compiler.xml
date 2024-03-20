@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="proj1" />
+        <module name="ssvv" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="proj1" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
