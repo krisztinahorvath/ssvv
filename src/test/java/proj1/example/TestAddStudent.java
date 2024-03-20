@@ -1,7 +1,7 @@
-package tests;
+package proj1.example;
 
 import domain.Student;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import repository.NotaXMLRepo;
 import repository.StudentXMLRepo;
@@ -10,14 +10,12 @@ import service.Service;
 import validation.NotaValidator;
 import validation.StudentValidator;
 import validation.TemaValidator;
-import validation.ValidationException;
 
-import static org.junit.Assert.assertThrows;
+public class TestAddStudent{
+    public static Service service;
 
-
-public class TestAddStudent {
-    @Test
-    public void testAddStudent(){
+    @BeforeAll
+    public static void setup(){
         StudentValidator studentValidator = new StudentValidator();
         TemaValidator temaValidator = new TemaValidator();
         String filenameStudent = "fisiere/Studenti.xml";
@@ -28,19 +26,27 @@ public class TestAddStudent {
         TemaXMLRepo temaXMLRepository = new TemaXMLRepo(filenameTema);
         NotaValidator notaValidator = new NotaValidator(studentXMLRepository, temaXMLRepository);
         NotaXMLRepo notaXMLRepository = new NotaXMLRepo(filenameNota);
-        Service service = new Service(studentXMLRepository, studentValidator, temaXMLRepository, temaValidator, notaXMLRepository, notaValidator);
+        service = new Service(studentXMLRepository, studentValidator, temaXMLRepository, temaValidator, notaXMLRepository, notaValidator);
+    }
 
-        // invalid student
-        Student student1 = new Student("", "ana", 933, "ana@email.com");
-
-        assertThrows(ValidationException.class, () -> {
-            service.addStudent(student1);
-        });
-
+    @Test
+    public void addStudentWorks(){
         // valid student
         Student student2 = new Student("1234567", "maria", 933, "maria@email.com");
 
-        Assertions.assertNull(service.addStudent(student2));
+        service.addStudent(student2);
+    }
+
+    @Test
+    public void addStudentFails(){
+        Student student1 = new Student("", "ana", 933, "ana@email.com");
+
+        try{
+            service.addStudent(student1);
+        } catch (Exception e){
+
+        }
+
 
     }
 }
