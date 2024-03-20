@@ -41,12 +41,7 @@ public class TestAddStudent{
     public void addStudentFails(){
         Student student1 = new Student("", "ana", 933, "ana@email.com");
 
-        try{
-            service.addStudent(student1);
-        } catch (Exception e){
 
-        }
-
-
+        service.addStudent(student1);
     }
 }
