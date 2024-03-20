@@ -1,4 +1,4 @@
-package ssvv.example;
+package ssvv;
 
 import domain.Student;
 import org.junit.jupiter.api.BeforeAll;
