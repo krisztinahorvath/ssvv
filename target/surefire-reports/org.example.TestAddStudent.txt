@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: org.example.TestAddStudent
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.155 s <<< FAILURE! - in org.example.TestAddStudent
+org.example.TestAddStudent.addStudentFails  Time elapsed: 0.039 s  <<< ERROR!
+validation.ValidationException: Id incorect!
+	at validation.StudentValidator.validate(StudentValidator.java:15)
+	at service.Service.addStudent(Service.java:61)
+	at org.example.TestAddStudent.addStudentFails(TestAddStudent.java:45)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
