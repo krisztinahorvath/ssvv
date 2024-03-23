@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-// TODO fix addStudent bug if it exists
-
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestAddStudent{
     public static Service service;
