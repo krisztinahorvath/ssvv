@@ -10,6 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Lecture02MaxPointsParticipants" target="1.8" />
       <module name="proj1" target="17" />
     </bytecodeTargetLevel>
   </component>
