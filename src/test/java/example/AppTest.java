@@ -54,7 +54,7 @@ public class AppTest {
 
     @Test
     @Order(1)
-    public void addStudentWorks() {
+    public void tc_1_addStudentWorks() {
         Student student = new Student("20000", "Sharon", 933, "sharon@email.com");
         assertNull(service.addStudent(student));
     }
