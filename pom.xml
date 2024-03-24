@@ -7,7 +7,7 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>ssvv</name>
+  <name>example</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -26,7 +26,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>5.7.2</version> <!-- Specify the desired version here -->
+      <version>5.7.2</version>
       <scope>test</scope>
     </dependency>
 
