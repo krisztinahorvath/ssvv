@@ -59,6 +59,8 @@ public class Service {
      */
     public Student addStudent(Student student) {
         studentValidator.validate(student);
+        studentValidator.validateEmail(studentFileRepository, student.getEmail()); // bug fix 3
+
         return studentFileRepository.save(student);
     }
 
