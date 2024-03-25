@@ -18,7 +18,7 @@ public class StudentValidator implements Validator<Student> {
             throw new ValidationException("Id incorect!");
         }
 
-        if(entity.getID().equals("")){
+        if(entity.getID().isEmpty()){
             throw new ValidationException("Id incorect!");
         }
 
@@ -38,7 +38,7 @@ public class StudentValidator implements Validator<Student> {
             throw new ValidationException("Nume incorect!");
         }
 
-        if(entity.getEmail().equals("")){
+        if(entity.getEmail().isEmpty()){
             throw new ValidationException("Email incorect!");
         }
     }
