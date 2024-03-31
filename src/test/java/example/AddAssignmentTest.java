@@ -15,6 +15,8 @@ import validation.ValidationException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AddAssignmentTest {
@@ -59,6 +61,30 @@ public class AddAssignmentTest {
     @Test
     public void addAssignmentEmpyDescription(){
         Tema tema = new Tema("1", "", 2, 2);
+        assertThrows(ValidationException.class, () -> service.addTema(tema));
+    }
+
+    @Test
+    public void addAssignmentInvalidDeadline(){
+        Tema tema = new Tema("1", "decriere", 0, 2);
+        assertThrows(ValidationException.class, () -> service.addTema(tema));
+    }
+
+    @Test
+    public void addAssignmentInvalidPrimire(){
+        Tema tema = new Tema("1", "decriere", 2, 0);
+        assertThrows(ValidationException.class, () -> service.addTema(tema));
+    }
+
+    @Test
+    public void addAssignmentNullNrTema(){
+        Tema tema = new Tema(null, "decriere", 2, 2);
+        assertThrows(ValidationException.class, () -> service.addTema(tema));
+    }
+
+    @Test
+    public void addAssignmentEmptyNrTema(){
+        Tema tema = new Tema("", "decriere", 2, 2);
         assertThrows(ValidationException.class, () -> service.addTema(tema));
     }
 }
