@@ -16,13 +16,10 @@ import validation.StudentValidator;
 import validation.TemaValidator;
 import validation.ValidationException;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 
 public class BigBangTest {
@@ -82,6 +79,22 @@ public class BigBangTest {
     }
 
     @Test
+    public void addStudent_emptyId(){
+        Student student = new Student("", "Sharon", 933, "sharon1@email.com");
+
+        doThrow(new ValidationException("Null student id!")).when(studentValidator).validate(student);
+        Assertions.assertThrows(ValidationException.class, () -> service.addStudent(student));
+    }
+
+    @Test
+    public void addAssignment_invalidDeadline(){
+        Tema tema = new Tema("1", "decriere", 0, 2);
+
+        doThrow(new ValidationException("Invalid deadline!")).when(temaValidator).validate(tema);
+        Assertions.assertThrows(ValidationException.class, () -> service.addTema(tema));
+    }
+
+    @Test
     public void addAssignment_emptyDescription(){
         Tema tema = new Tema("1", "", 2, 2);
 
@@ -108,5 +121,44 @@ public class BigBangTest {
         addStudent_nullId();
         addAssignment_emptyDescription();
         addGrade_emptyId();
+    }
+
+    @Test
+    public void addAssignment_incremental() {
+        // add student
+        Student student = new Student("20000", "Sharon", 933, "sharon@email.com");
+
+        assertNull(service.addStudent(student));
+
+        // add assignment
+        Tema tema = new Tema("1", "decriere", 2, 2);
+        assertNull(service.addTema(tema));
+    }
+
+    @Test
+    public void addGradeAssignment_incremental() {
+        Student student = new Student("1", "mariana", 933, "mariana@email.com");
+
+        Tema tema = new Tema("1", "descriere", 12, 2);
+
+        Nota nota = new Nota("1", "1", "1", 10, LocalDate.of(2024, 12, 10));
+
+        doNothing().when(studentValidator).validate(student);
+        when(studentXMLRepo.save(student)).thenReturn(null);
+
+        doNothing().when(temaValidator).validate(tema);
+        when(temaXMLRepo.save(tema)).thenReturn(null);
+
+        when(studentXMLRepo.findOne("1")).thenReturn(student);
+        when(temaXMLRepo.findOne("1")).thenReturn(tema);
+
+        Student returnedStudent = service.addStudent(student);
+        Assertions.assertNull(returnedStudent);
+
+        Tema returnedTema = service.addTema(tema);
+        Assertions.assertNull(returnedTema);
+
+        doThrow(new ValidationException("Assignment deadline passed")).when(notaValidator).validate(nota);
+        assertThrows(ValidationException.class, () -> service.addNota(nota, ""));
     }
 }
